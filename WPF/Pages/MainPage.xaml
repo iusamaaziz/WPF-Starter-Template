@@ -1,0 +1,79 @@
+﻿<local:BasePage
+	x:Class="WPF.MainPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:WPF"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Title="MainPage"
+	d:DesignHeight="450"
+	d:DesignWidth="800"
+	x:TypeArguments="local:MainPageViewModel"
+	mc:Ignorable="d">
+
+	<Grid Background="#F9F9F9">
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="160" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<!--  Side Menu  -->
+		<materialDesign:Card
+			Margin="4"
+			materialDesign:ShadowAssist.ShadowEdges="All"
+			UniformCornerRadius="3">
+
+			<local:SideMenuListControl Grid.Column="0" Visibility="{Binding SideMenuVisible, Converter={local:BooleanToVisibilityConvertor}, ConverterParameter=True}" />
+		</materialDesign:Card>
+
+		<!--  Canva  -->
+		<Grid Grid.Column="1">
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="4*" />
+			</Grid.RowDefinitions>
+
+			<!--  User information  -->
+			<materialDesign:Card
+				Margin="4"
+				materialDesign:ShadowAssist.ShadowEdges="All"
+				UniformCornerRadius="3">
+
+				<Grid Grid.Row="0" Grid.Column="1">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="auto" />
+						<ColumnDefinition Width="auto" />
+						<ColumnDefinition Width="auto" />
+
+					</Grid.ColumnDefinitions>
+
+					<Grid.RowDefinitions>
+						<RowDefinition Height="105*" />
+						<RowDefinition Height="105*" />
+						<RowDefinition Height="20*" />
+						<RowDefinition Height="20*" />
+						<RowDefinition Height="20*" />
+					</Grid.RowDefinitions>
+
+				</Grid>
+			</materialDesign:Card>
+
+			<!--  Content  -->
+			<Frame
+				x:Name="ContentFrame"
+				Grid.Row="1"
+				Grid.Column="0"
+				Margin="0,4,4,4"
+				Background="#F9F9F9"
+				Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConvertor}}"
+				NavigationUIVisibility="Hidden" />
+		</Grid>
+
+
+	</Grid>
+</local:BasePage>
